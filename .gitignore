@@ -1,0 +1,7 @@
+**/build/
+**/__pycache__/
+*.pyc
+*.class
+*.jar
+examples/Sensing/AutoStar/RoleStartMsg.java
+analysis/measurements.csv

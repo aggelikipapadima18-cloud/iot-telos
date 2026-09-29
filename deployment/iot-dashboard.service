@@ -1,0 +1,15 @@
+[Unit]
+Description=TelosB live dashboard
+After=mongodb.service
+Wants=mongodb.service
+
+[Service]
+Type=simple
+User=iotlab
+WorkingDirectory=/home/iotlab/tinyos-main/iot-implementation/host
+ExecStart=/usr/bin/python3 /home/iotlab/tinyos-main/iot-implementation/host/dashboard.py --bind 0.0.0.0 --port 8765
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

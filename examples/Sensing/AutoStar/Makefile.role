@@ -1,0 +1,14 @@
+SENSOR_DIR = ../tmote_onboard_sensors
+TINYOS_OS_DIR ?= ../../../../tos
+TFLAGS = -I$(SENSOR_DIR) -I$(TINYOS_OS_DIR)/types -I$(TINYOS_OS_DIR)/platforms/null -I$(TINYOS_OS_DIR)/lib/serial
+
+all: RoleStart.class
+
+RoleStartMsg.java: ../SensingMsgs.h $(SENSOR_DIR)/SensorSample.h
+	nescc-mig $(TFLAGS) -java-classname=RoleStartMsg java ../SensingMsgs.h role_start_msg -o $@
+
+RoleStart.class: RoleStart.java RoleStartMsg.java
+	javac RoleStart.java RoleStartMsg.java
+
+clean:
+	rm -f RoleStart.class RoleStartMsg.class RoleStartMsg.java

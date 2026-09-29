@@ -1,0 +1,16 @@
+[Unit]
+Description=TelosB AutoStar sensor ingester
+After=mongodb.service
+Wants=mongodb.service
+
+[Service]
+Type=simple
+User=iotlab
+SupplementaryGroups=dialout
+WorkingDirectory=/home/iotlab/tinyos-main/iot-implementation
+ExecStart=/bin/bash /home/iotlab/tinyos-main/iot-implementation/host/start_live.sh serial@/dev/ttyUSB0:telosb --journal /home/iotlab/measurements.jsonl
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
